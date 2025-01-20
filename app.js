@@ -6,7 +6,7 @@ let amigos = []; // Array que armazena os nomes dos amigos
 function adicionarAmigos() {
     let nome = document.querySelector("input").value;
     // Valida se o nome não está vazio
-    let nomes = nome == "" ? alert("Por favor, insira um nome.") : "";
+    nome == "" ? alert("Por favor, insira um nome.") : "";
     
     // Adiciona o nome ao array de amigos
     amigos.push(nome);
