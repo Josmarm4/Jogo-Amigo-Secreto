@@ -1,35 +1,61 @@
-//O principal objetivo deste desafio é fortalecer suas habilidades em lógica de programação. 
-// Aqui você deverá desenvolver a lógica para resolver o problema.
-// Certifique-se de que "amigos" seja sempre um array
 let amigos = []; // Array que armazena os nomes dos amigos
 
 function adicionarAmigos() {
-    let nome = document.querySelector("input").value;
+    let nome = document.querySelector("input").value.trim();
     // Valida se o nome não está vazio
-    nome == "" ? alert("Por favor, insira um nome.") : "";
-    
+    if(nome == ""){
+        alert("Por favor, insira um nome.")
+        return;
+    }
+
+    // Verifica se o nome já foi adicionado
+    if (amigos.includes(nome)) {
+        alert("Esse nome já foi adicionado.");
+        return;
+    }
+
     // Adiciona o nome ao array de amigos
     amigos.push(nome);
 
-     // Atualiza a lista exibida no HTML com o novo nome
-     exibirLista(nome);
+    // Atualiza a lista exibida no HTML com o novo nome
+    atualizarLista();
 
     // Limpa o campo de entrada
     limparCampo();
 }
 
-function exibirLista(nome) {
-    let lista = document.getElementById("listaAmigos"); // Seleciona o elemento <ul>
+function atualizarLista(){
+    let lista = document.getElementById("listaAmigos");
 
-    // Cria um novo item <li> com o nome fornecido
-    let item = document.createElement("li");
-    item.textContent = nome; // Define o texto como o nome do amigo
+    // Limpa lista anterior
+    lista.innerHTML = ""; 
 
-    // Adiciona o novo item diretamente na lista
-    lista.appendChild(item);
+    // Adiciona cada amigo ao HTML como um item <li>
+    for(let i = 0; i < amigos.length; i++){
+        lista.innerHTML += (`<li> ${amigos[i]} </li>`);
+    }
+}
+
+function sortearAmigo(){
+    // Verifica se a lista está vázia
+    if(amigos.length == 0){
+        alert("A lista de amigos está vázia. Por favor, adicione nomes antes de sortear.");
+        return;
+    }
+
+    //Gerar um indice aleatório com base no tamamho do array
+    let indiceSorteado = Math.floor(Math.random() * amigos.length);
+
+    //Exibe o nome sorteado 
+    let nomeSorteado = amigos[indiceSorteado];
+    let resultado = document.getElementById("resultado");
+    resultado.innerHTML = `<p>Amigo sorteado: <strong>${nomeSorteado}</strong></p>`;
+
 }
 
 function limparCampo() {
     let campo = document.querySelector("input");
-    campo.value = ""; // Redefine o valor do campo
+    
+    // Limpa o valor do campo
+    campo.value = ""; 
 }
